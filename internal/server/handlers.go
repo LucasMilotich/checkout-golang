@@ -3,9 +3,9 @@ package server
 import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/lucasmilotich/coreapi/internal/controller"
-	"github.com/lucasmilotich/coreapi/internal/dao"
-	"github.com/lucasmilotich/coreapi/internal/service"
+	"github.com/lucasmilotich/checkout-golang/internal/controller"
+	"github.com/lucasmilotich/checkout-golang/internal/dao"
+	"github.com/lucasmilotich/checkout-golang/internal/service"
 )
 
 func setupMiddlewares(r *chi.Mux) {

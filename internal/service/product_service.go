@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/lucasmilotich/coreapi/internal/dao"
-	"github.com/lucasmilotich/coreapi/internal/model"
+	"github.com/lucasmilotich/checkout-golang/internal/dao"
+	"github.com/lucasmilotich/checkout-golang/internal/model"
 )
 
 type ProductService struct {

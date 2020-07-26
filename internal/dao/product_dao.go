@@ -4,7 +4,7 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/lucasmilotich/coreapi/internal/model"
+	"github.com/lucasmilotich/checkout-golang/internal/model"
 )
 
 type ProductDB struct {

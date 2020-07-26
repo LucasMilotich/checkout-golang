@@ -2,9 +2,9 @@ package service
 
 import (
 	"errors"
-	"github.com/lucasmilotich/coreapi/internal/dao"
-	"github.com/lucasmilotich/coreapi/internal/dto"
-	"github.com/lucasmilotich/coreapi/internal/model"
+	"github.com/lucasmilotich/checkout-golang/internal/dao"
+	"github.com/lucasmilotich/checkout-golang/internal/dto"
+	"github.com/lucasmilotich/checkout-golang/internal/model"
 	"math"
 )
 

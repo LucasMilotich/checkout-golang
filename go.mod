@@ -1,4 +1,4 @@
-module github.com/lucasmilotich/coreapi
+module github.com/lucasmilotich/checkout-golang
 
 go 1.13
 

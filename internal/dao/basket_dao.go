@@ -3,7 +3,7 @@ package dao
 import (
 	"errors"
 	"github.com/google/uuid"
-	"github.com/lucasmilotich/coreapi/internal/model"
+	"github.com/lucasmilotich/checkout-golang/internal/model"
 	"sync"
 )
 

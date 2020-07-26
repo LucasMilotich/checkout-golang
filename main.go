@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/lucasmilotich/coreapi/internal/server"
+	"github.com/lucasmilotich/checkout-golang/internal/server"
 )
 
 // go run main.go

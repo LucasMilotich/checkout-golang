@@ -2,8 +2,8 @@ package controller
 
 import (
 	"encoding/json"
-	"github.com/lucasmilotich/coreapi/internal/dto"
-	"github.com/lucasmilotich/coreapi/internal/service"
+	"github.com/lucasmilotich/checkout-golang/internal/dto"
+	"github.com/lucasmilotich/checkout-golang/internal/service"
 	"net/http"
 
 	"github.com/go-chi/chi"
