@@ -49,6 +49,23 @@ func Test_checkout(t *testing.T) {
 
 	})
 
+	t.Run("Create checkout, add a product, and get it", func(t *testing.T) {
+		response, _ := httpClient.Post(server.URL+checkoutEndpoint, "application/json", bytes.NewBufferString(body))
+
+		createdBasket := model.Basket{}
+		_ = json.NewDecoder(response.Body).Decode(&createdBasket)
+
+		assert.NotNil(t, createdBasket)
+
+		response, _ = httpClient.Get(server.URL + checkoutEndpoint + createdBasket.ID)
+
+		basket := model.Basket{}
+		_ = json.NewDecoder(response.Body).Decode(&basket)
+
+		assert.Equal(t, createdBasket, basket)
+
+	})
+
 }
 
 func init() {
