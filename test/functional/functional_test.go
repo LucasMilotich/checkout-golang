@@ -67,7 +67,3 @@ func Test_checkout(t *testing.T) {
 	})
 
 }
-
-func init() {
-
-}

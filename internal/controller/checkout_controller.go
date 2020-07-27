@@ -35,7 +35,6 @@ func (c *CheckoutController) Delete(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write(data)
 }
 
-
 func (c *CheckoutController) Modify(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 
