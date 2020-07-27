@@ -6,6 +6,7 @@ import (
 	"github.com/lucasmilotich/checkout-golang/internal/controller"
 	"github.com/lucasmilotich/checkout-golang/internal/dao"
 	"github.com/lucasmilotich/checkout-golang/internal/service"
+	log "github.com/sirupsen/logrus"
 )
 
 func setupMiddlewares(r *chi.Mux) {
@@ -30,5 +31,9 @@ func BindEndpoints(r *chi.Mux) {
 	r.Delete("/checkouts/{id}", checkoutController.Delete)
 	r.Post("/checkouts", checkoutController.Create)
 
-	println("server started")
+	log.SetFormatter(&log.TextFormatter{
+		DisableColors: false,
+		FullTimestamp: true,
+	})
+	log.Info("Server started")
 }

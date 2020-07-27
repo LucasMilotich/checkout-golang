@@ -25,6 +25,7 @@ func (db *DiscountDB) GetAllDiscounts() ([]model.Discount, error) {
 		ProductCode:                "PEN",
 		MinProductsInBasket:        3,
 		PackagePromotion:           true,
+		// 3 decimal to get better precision, instead of this we can uses int64 everywhere
 		DiscountPerUnitToBeApplied: 0.333,
 	}, model.Discount{
 		ProductCode:                "TSHIRT",

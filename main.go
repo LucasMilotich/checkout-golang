@@ -2,7 +2,6 @@ package main
 
 import (
 	"net/http"
-
 	"github.com/go-chi/chi"
 	"github.com/lucasmilotich/checkout-golang/internal/server"
 )
@@ -21,4 +20,5 @@ func startServer() error {
 
 	err := http.ListenAndServe(":8080", r)
 	return err
+
 }

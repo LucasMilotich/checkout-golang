@@ -2,11 +2,11 @@ package controller
 
 import (
 	"encoding/json"
+	"github.com/go-chi/chi"
 	"github.com/lucasmilotich/checkout-golang/internal/dto"
 	"github.com/lucasmilotich/checkout-golang/internal/service"
+	log "github.com/sirupsen/logrus"
 	"net/http"
-
-	"github.com/go-chi/chi"
 )
 
 type CheckoutController struct {
@@ -94,6 +94,7 @@ func (c *CheckoutController) Create(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&checkoutDTO)
 
 	if err != nil {
+		log.Error("Error creating checkout", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = w.Write([]byte("{\"error\": error unmarshalling}"))
 		return
@@ -109,6 +110,7 @@ func (c *CheckoutController) Create(w http.ResponseWriter, r *http.Request) {
 
 	data, err := json.Marshal(entity)
 	if err != nil {
+		log.Error("Error creating checkout", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = w.Write([]byte("{\"error\": failed to marshal}"))
 		return

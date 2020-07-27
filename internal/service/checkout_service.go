@@ -5,6 +5,7 @@ import (
 	"github.com/lucasmilotich/checkout-golang/internal/dao"
 	"github.com/lucasmilotich/checkout-golang/internal/dto"
 	"github.com/lucasmilotich/checkout-golang/internal/model"
+	log "github.com/sirupsen/logrus"
 	"math"
 )
 
@@ -22,6 +23,7 @@ type basketAux struct {
 func (s CheckoutService) GetById(id string) (model.Basket, *model.ApiError) {
 	basket, err := s.DB.Get(id)
 	if err != nil {
+		log.Warn("checkout not found", id )
 		return model.Basket{}, &model.ApiError{
 			Code:    404,
 			Message: "basket not found",
@@ -50,7 +52,6 @@ func (s CheckoutService) CreateCheckout(productsIDs []string) (model.Basket, *mo
 
 	products, err := s.ProductService.GetAllByIDs(productsIDs)
 	if err != nil {
-		println("no product")
 		return model.Basket{}, &model.ApiError{
 			Code:    400,
 			Message: "product does not exist",
@@ -77,6 +78,7 @@ func (s CheckoutService) ModifyBasket(id string, dto dto.CreationCheckoutDTO) (m
 
 	basket, err := s.DB.Get(id)
 	if err != nil {
+		log.Warn("checkout not found with id:", id )
 		return model.Basket{}, &model.ApiError{
 			Code:    404,
 			Message: "basket did not found",
@@ -134,13 +136,21 @@ func (s CheckoutService) getCalculatedDiscounts(quantityPerProduct map[string]ba
 
 func (s CheckoutService) getDiscount(discount model.Discount, aux basketAux) float64 {
 	if discount.PackagePromotion {
-		quantityOfPromotionsToBeApplied := aux.quantity / discount.MinProductsInBasket
-		return math.Round(
-			float64(quantityOfPromotionsToBeApplied) *
-				float64(discount.MinProductsInBasket) *
-				discount.DiscountPerUnitToBeApplied *
-				aux.price)
+		return s.packageDiscount(discount, aux)
 	} else {
-		return discount.DiscountPerUnitToBeApplied * aux.price * float64(aux.quantity)
+		return s.bucketDiscount(discount, aux)
 	}
+}
+
+func (s CheckoutService) bucketDiscount(discount model.Discount, aux basketAux) float64 {
+	return discount.DiscountPerUnitToBeApplied * aux.price * float64(aux.quantity)
+}
+
+func (s CheckoutService) packageDiscount(discount model.Discount, aux basketAux) float64 {
+	quantityOfPromotionsToBeApplied := aux.quantity / discount.MinProductsInBasket
+	return math.Round(
+		float64(quantityOfPromotionsToBeApplied) *
+			float64(discount.MinProductsInBasket) *
+			discount.DiscountPerUnitToBeApplied *
+			aux.price)
 }
