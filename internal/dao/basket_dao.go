@@ -20,9 +20,6 @@ func NewBasketDB() *BasketDB {
 }
 
 func (db *BasketDB) Get(id string) (model.Basket, error) {
-	db.mux.Lock()
-	defer db.mux.Unlock()
-
 	entity, ok := db.elements[id]
 	if !ok {
 		return model.Basket{}, errors.New("not found")

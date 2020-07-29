@@ -97,6 +97,7 @@ func (s CheckoutService) ModifyBasket(id string, dto dto.CreationCheckoutDTO) (m
 	}
 
 	basket.Products = products
+	basket.TotalAmount = s.calculateTotalAmount(products)
 	return s.DB.Update(basket), nil
 
 }
